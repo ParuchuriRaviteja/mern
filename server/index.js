@@ -42,5 +42,8 @@ async function StartServer(){
 function TESTING(){
     return 1;
 }
+function Test2(){
+    return false
+}
 TESTING()
 StartServer()
