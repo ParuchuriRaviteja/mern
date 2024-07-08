@@ -46,4 +46,5 @@ function Test2(){
     return false
 }
 TESTING()
+Test2()
 StartServer()
