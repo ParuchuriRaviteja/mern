@@ -1,50 +1,41 @@
-//const process=require('dotenv').config()
-const express=require('express')
-const mongoose=require('mongoose')
-const {ApolloServer,gql}=require('apollo-server-express')
-const typeDefs=require('./schema')
-const resolvers=require('./resolvers')
-const cors=require('cors')
-const session=require('express-session')
-const app=express()
-const port=3001
-const url='mongodb+srv://ravitejachowdary266:Raviteja369@cluster0.sjkn5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
-const userApiFromRouter=require('./routes/userRoutes')
+const express = require('express');
+const mongoose = require('mongoose')
+const {ApolloServer,gql } = require('apollo-server-express');
+const typeDefs = require('./schema');
+const resolvers = require('./resolvers');
+const cors = require('cors')//import cors
+const userApiFromRouter = 
+require('./routes/userRoutes') //import
+const app = express() 
+const port = 3001;
+const url= 'mongodb+srv://ravitejachowdary266:Raviteja369@cluster0.sjkn5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+
 app.use(express.json())
-app.use(cors())
+app.use(cors()) //using cors
+mongoose.connect(url,{useNewUrlParser:true,
+useUnifiedTopology:true})
+.then(()=>{})
+.catch((err)=>{})
 
-SESSION_SECRET='hT&k#V7$4@Wf2zY'
+const server = new ApolloServer({typeDefs,resolvers});
+app.use('/users',userApiFromRouter);//add router
 
-//const url = process.env.MONGODB_URI;
-//const sessionSecret = process.env.SESSION_SECRET;
-//console.log(url)
-//console.log(sessionSecret)
+// async function StartServer(){
+//    await server.start();
+//    server.applyMiddleware({app});
+//    const httpServer= app.listen(port,()=>{
+//     console.log('Server Live 3001');
+//    })
+//    return httpServer;
+// }
 
-app.use(session({
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false } // Set to true if using HTTPS
-}));
-
-
-mongoose.connect(url,{useNewUrlParser:true,useUnifiedTopology:true}).then(()=>{console.log('DB connected')})
-.catch((err)=>{console.log(err.message)})
-
-const server=new ApolloServer({typeDefs,resolvers})
-
-app.use("/user",userApiFromRouter)
 async function StartServer(){
-    await server.start();
-    server.applyMiddleware({app})
-    app.listen(port,()=>{console.log(`Server is live on ${port}`)})
-}
-function TESTING(){
-    return 1;
-}
-function Test2(){
-    return false
-}
-TESTING()
-Test2()
-StartServer()
+   await server.start();
+   server.applyMiddleware({app});
+   const httpServer= app.listen(port,()=>{
+    console.log('Server Live 3001');
+   })
+   return httpServer;
+} 
+
+module.exports={app,StartServer}

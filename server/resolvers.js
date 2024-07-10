@@ -6,14 +6,14 @@ const { query } = require('express');
 const User = require('./model/userSchema');//parent
 const resolvers ={
     Query:{
-        getUser: async(_,{id})=>{return await User.findById(id);},
-        getUsers: async()=>{return await User.find();},
-        searchUsers: async(_,{name})=>{return await User.find(
-            {name:new RegExp(name,'i')})
-        },
-        getLimitedUser:async(_,{limit,offset})=>{
-            return await User.find().skip(offset).limit(limit)
-        }
+        //getUser: async(_,{id})=>{return await User.findById(id);},
+        getAllUsers: async()=>{return await User.find();},
+        //searchUsers: async(_,{name})=>{return await User.find(
+        //    {name:new RegExp(name,'i')})
+        //},
+        //getLimitedUser:async(_,{limit,offset})=>{
+        //    return await User.find().skip(offset).limit(limit)
+       // }
     },
     Mutation:{
         createUser:async (_,{input})=>{

@@ -10,9 +10,8 @@ type User {
 }
 type Query {
     getUser(id:ID!):User
-    getUsers:[User]
-    searchUsers(name:String!):[User]
-    getLimitedUser(limit:Int!,offset:Int!):User
+    getAllUsers:[User]
+  
 }
     input createUserInput{
     name:String!,
