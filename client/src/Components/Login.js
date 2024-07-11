@@ -73,7 +73,7 @@ export default function Login(){
         </form>
     );
 }*/
-
+import ReactDOM from 'react-dom';
 import React, { useState } from "react"; 
 import axios from "axios"; // Import Axios 
 export default function Login() {
@@ -91,8 +91,7 @@ export default function Login() {
 const handleSubmit = async (e) => { 
 e.preventDefault(); // Prevent default form submission 
 try { 
-const response = await axios.post("http://
- localhost:3001/users/login", formData); 
+const response = await axios.post("http://localhost:3001/users/login", formData); 
 console.log("Login successful!", response.data); 
 alert(response.data); 
         } 

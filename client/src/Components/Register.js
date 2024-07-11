@@ -1,5 +1,6 @@
 //Register.js in client
 import { useState } from "react"
+import ReactDOM from 'react-dom';
 export default function Register(){
     const [formData,setForm]=useState({
         name:"",

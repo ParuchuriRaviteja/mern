@@ -1,5 +1,6 @@
 //navbar.js in client
 import { Link } from "react-router-dom"
+import ReactDOM from 'react-dom';
 export default function navbar(){
     return(
         <div>
